@@ -1,0 +1,6 @@
+import { useState } from 'react'
+import { ChevronDown } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Button, PageHero } from '../components/Shared'
+import { faqs } from '../data/site'
+export default function FaqPage(){const [open,setOpen]=useState(0);return <><PageHero eyebrow="Frequently asked questions" title="Clear answers before an ERP or software project begins." text="These answers provide general guidance. Final commitments belong in the approved proposal and agreement."><Button to="/contact">Ask About Your Project</Button></PageHero><section className="section-pad"><div className="container-shell max-w-4xl space-y-3">{faqs.map(([q,a],i)=><div key={q} className="overflow-hidden rounded-2xl border border-slate-200 bg-white"><button onClick={()=>setOpen(open===i?-1:i)} className="flex w-full items-center justify-between gap-5 p-6 text-left"><span className="font-display font-bold text-slate-950">{q}</span><ChevronDown className={`shrink-0 text-cyan transition ${open===i?'rotate-180':''}`}/></button><AnimatePresence initial={false}>{open===i&&<motion.div initial={{height:0,opacity:0}} animate={{height:'auto',opacity:1}} exit={{height:0,opacity:0}}><p className="border-t border-slate-100 px-6 py-5 text-sm leading-7 text-slate-600">{a}</p></motion.div>}</AnimatePresence></div>)}</div></section></>}
